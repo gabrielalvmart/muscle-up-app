@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">muscle_up_app</string>
+    <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_my_records">MyRecords</string>
+    <string name="title_activity_weight_calculator">WeightCalculator</string>
+    <string name="title_activity_trainings">Trainings</string>
+</resources>
