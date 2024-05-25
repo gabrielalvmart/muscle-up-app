@@ -26,23 +26,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(navController: NavController) {
+    val viewModel: LoginViewModel = hiltViewModel();
     Box(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)) {
-        Login(Modifier.align(Alignment.Center), viewModel)
+        Login(Modifier.align(Alignment.Center), viewModel, navController)
     }
 }
 
 @Composable
-fun Login(modifier: Modifier, viewModel: LoginViewModel) {
+fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavController) {
     val email by viewModel.email.observeAsState("")
     val password by viewModel.password.observeAsState("")
     val loginResult by viewModel.loginResult.observeAsState()
+    var showError by remember { mutableStateOf(false) }
 
     Column(modifier = modifier.fillMaxWidth()) {
         HeaderImage(Modifier.align(Alignment.CenterHorizontally))
@@ -55,20 +61,21 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel) {
         Spacer(modifier = Modifier.padding(8.dp))
         LoginButton { viewModel.login() }
 
-        loginResult?.let {
-            if (it.email != null) {
-                Text(
-                    text = "Login Successful " + it.email,
-                    color = Color.Green,
-                    modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp)
-                )
+
+        LaunchedEffect(loginResult) {
+            if (loginResult != null) {
+                navController.navigate("mainMenu")
             } else {
-                Text(
-                    text = "Login Failed",
-                    color = Color.Red,
-                    modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp)
-                )
+                showError = true
             }
+        }
+
+        if (showError) {
+            Text(
+                text = "Login Failed",
+                color = Color.Red,
+                modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp)
+            )
         }
     }
 }
@@ -107,7 +114,8 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         singleLine = true,
         maxLines = 1,
-        textStyle = TextStyle(color = Color.Blue)
+        textStyle = TextStyle(color = Color.Black ),
+        visualTransformation = PasswordVisualTransformation()
     )
 }
 
@@ -120,7 +128,7 @@ fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         singleLine = true,
         maxLines = 1,
-        textStyle = TextStyle(color = Color.Blue)
+        textStyle = TextStyle(color = Color.Black)
     )
 }
 

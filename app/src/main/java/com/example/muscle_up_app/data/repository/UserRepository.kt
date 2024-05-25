@@ -4,9 +4,10 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
 
-class UserRepository {
+class UserRepository @Inject constructor() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     suspend fun login(email: String, password: String): FirebaseUser? {
@@ -29,3 +30,4 @@ class UserRepository {
         auth.signOut()
     }
 }
+

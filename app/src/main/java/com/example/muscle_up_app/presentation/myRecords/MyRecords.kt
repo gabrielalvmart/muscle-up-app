@@ -10,37 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.muscle_up_app.presentation.ui.theme.Muscle_up_appTheme
 
-class MyRecords : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Muscle_up_appTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting4("Android")
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun Greeting4(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun MyRecords(navController: NavController){
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview4() {
-    Muscle_up_appTheme {
-        Greeting4("Android")
-    }
 }

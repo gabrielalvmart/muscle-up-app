@@ -8,10 +8,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.muscle_up_app.data.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
-class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
 
@@ -30,7 +33,6 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
     }
 
     fun login() {
-            Log.d("muscless", "logging in!!!!")
             viewModelScope.launch {
             val user = userRepository.login(_email.value.orEmpty(), _password.value.orEmpty())
             _loginResult.value = user

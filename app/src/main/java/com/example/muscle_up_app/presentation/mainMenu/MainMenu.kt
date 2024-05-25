@@ -1,46 +1,130 @@
 package com.example.muscle_up_app.presentation.mainMenu
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.muscle_up_app.presentation.ui.theme.Muscle_up_appTheme
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 
-class MainMenu : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Muscle_up_appTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting3("Android")
+
+@Composable
+fun MainMenu(navController: NavController) {
+    val viewModel: MainMenuViewModel = hiltViewModel()
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly, // Distribute space evenly between rows
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Main Menu",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly // Distribute space evenly between columns
+        ) {
+            RoundedSquareWithIconAndDescription(
+                modifier = Modifier.size(150.dp), // Set a fixed size for the rounded square
+                icon = { Image(painter = painterResource(com.example.muscle_up_app.R.drawable.dumbbell), contentDescription = "Dumbbell Icon") },
+                description = "Trainings",
+                onClick = {  }
+            )
+            RoundedSquareWithIconAndDescription(
+                modifier = Modifier.size(150.dp), // Set a fixed size for the rounded square
+                icon = {
+                    Image(
+                        painter = painterResource(com.example.muscle_up_app.R.drawable.calcualtor),
+                        contentDescription = "Weight Calculator",
+                        modifier = Modifier.height(80.dp))},
+                description = "Weight Calc",
+                onClick = { }
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly // Distribute space evenly between columns
+        ) {
+            RoundedSquareWithIconAndDescription(
+                modifier = Modifier.size(150.dp), // Set a fixed size for the rounded square
+                icon = {
+                    Image(
+                        painter = painterResource(com.example.muscle_up_app.R.drawable.leaderboard),
+                        contentDescription = "My PRs",
+                        modifier = Modifier.height(64.dp))},
+                description = "My PRs",
+                onClick = {  }
+            )
+            RoundedSquareWithIconAndDescription(
+                modifier = Modifier.size(150.dp), // Set a fixed size for the rounded square
+                icon = {
+                    Image(
+                        painter = painterResource(com.example.muscle_up_app.R.drawable.logout),
+                        contentDescription = "Dumbbell Icon",
+                        modifier = Modifier.height(80.dp))},
+                description = "Logout",
+                onClick = {
+                    viewModel.onLogoutClicked()
+                    navController.navigate("login")
                 }
-            }
+            )
         }
     }
 }
 
 @Composable
-fun Greeting3(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun RoundedSquareWithIconAndDescription(
+    modifier: Modifier = Modifier,
+    icon: @Composable () -> Unit,
+    description: String,
+    onClick: () -> Unit
+) {
+    val borderColor = Color.Black // Change the color of the border as needed
+    val borderWidth = 2.dp // Change the width of the border as needed
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview3() {
-    Muscle_up_appTheme {
-        Greeting3("Android")
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .clickable(onClick = onClick)
+            .border(
+                BorderStroke(width = borderWidth, brush = SolidColor(borderColor)),
+                shape = RoundedCornerShape(16.dp)
+            )
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            shape = RoundedCornerShape(16.dp),
+            color = Color.White,
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                icon()
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = description,
+                    color = Color.Black
+                )
+            }
+        }
     }
 }
