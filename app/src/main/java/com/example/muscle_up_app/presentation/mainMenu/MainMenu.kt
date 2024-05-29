@@ -55,7 +55,9 @@ fun MainMenu(navController: NavController) {
                         contentDescription = "Weight Calculator",
                         modifier = Modifier.height(80.dp))},
                 description = "Weight Calc",
-                onClick = { }
+                onClick = {
+                    navController.navigate("weightCalculator")
+                }
             )
         }
         Row(
