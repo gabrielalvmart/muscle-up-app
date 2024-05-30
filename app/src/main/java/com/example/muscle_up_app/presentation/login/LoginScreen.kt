@@ -72,7 +72,7 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
 
         if (showError) {
             Text(
-                text = "Login Failed",
+                text = "",
                 color = Color.Red,
                 modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp)
             )

@@ -45,7 +45,7 @@ fun MainMenu(navController: NavController) {
                 modifier = Modifier.size(150.dp), // Set a fixed size for the rounded square
                 icon = { Image(painter = painterResource(com.example.muscle_up_app.R.drawable.dumbbell), contentDescription = "Dumbbell Icon") },
                 description = "Trainings",
-                onClick = {  }
+                onClick = { navController.navigate("trainings")  }
             )
             RoundedSquareWithIconAndDescription(
                 modifier = Modifier.size(150.dp), // Set a fixed size for the rounded square
@@ -55,7 +55,7 @@ fun MainMenu(navController: NavController) {
                         contentDescription = "Weight Calculator",
                         modifier = Modifier.height(80.dp))},
                 description = "Weight Calc",
-                onClick = { }
+                onClick = { navController.navigate("weightCalculator") }
             )
         }
         Row(
@@ -70,7 +70,7 @@ fun MainMenu(navController: NavController) {
                         contentDescription = "My PRs",
                         modifier = Modifier.height(64.dp))},
                 description = "My PRs",
-                onClick = {  }
+                onClick = { navController.navigate("myPRs") }
             )
             RoundedSquareWithIconAndDescription(
                 modifier = Modifier.size(150.dp), // Set a fixed size for the rounded square

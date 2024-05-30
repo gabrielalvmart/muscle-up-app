@@ -1,6 +1,7 @@
 package com.example.muscle_up_app.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
@@ -9,14 +10,21 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
-object UserRepositoryModule {
+object TrainingRepositoryModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(firebaseAuth: FirebaseAuth, firebaseDatabase: FirebaseDatabase): UserRepository {
-        return UserRepository(firebaseAuth, firebaseDatabase)
+    fun provideFirebaseDatabase(): DatabaseReference {
+        return FirebaseDatabase.getInstance().reference
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrainingRepository(databaseReference: DatabaseReference, userRepository: UserRepository): TrainingRepository {
+        return TrainingRepository(databaseReference, userRepository)
     }
 
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name="MuscleUpApplication"
+        android:name=".MuscleUpApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Muscle_up_app"
         tools:targetApi="31">
-
         <activity
-
+            android:name=".presentation.trainings.AddTrainingDialog"
+            android:exported="false"
+            android:label="@string/title_activity_add_training_dialog"
+            android:theme="@style/Theme.Muscle_up_app" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Muscle_up_app">

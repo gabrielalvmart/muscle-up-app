@@ -10,6 +10,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainMenuViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
+
     fun onLogoutClicked() {
         userRepository.logout()
     }
