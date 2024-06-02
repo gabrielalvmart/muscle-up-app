@@ -9,11 +9,16 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.muscle_up_app.data.repository.UserRepository
 import com.example.muscle_up_app.presentation.login.LoginScreen
+import com.example.muscle_up_app.presentation.login.LoginViewModel
 import com.example.muscle_up_app.presentation.mainMenu.MainMenu
 import com.example.muscle_up_app.presentation.myRecords.MyRecords
 import com.example.muscle_up_app.presentation.trainings.Trainings
