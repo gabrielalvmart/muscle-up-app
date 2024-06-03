@@ -45,6 +45,7 @@ val exercisesList = listOf(
     Exercise("Arnold press (dumbbells)", "Push"),
     Exercise("Tricep dips", "Push"),
     Exercise("Tricep extensions (dumbbell)", "Push"),
+    Exercise("Shoulder Press", "Push"),
 
     // Pull exercises
     Exercise("Pull-ups", "Pull"),
@@ -70,6 +71,7 @@ val exercisesList = listOf(
     Exercise("Calf raises (bodyweight)", "Legs"),
     Exercise("Calf raises (standing, machine)", "Legs"),
     Exercise("Hamstring curls (machine)", "Legs"),
+    Exercise("Deadlift", "Legs"),
 
     // Core
     Exercise("Plank", "Core"),
@@ -84,7 +86,10 @@ val exercisesList = listOf(
     Exercise("Leg raises", "Core"),
 
 
+    Exercise("Snatch", "Full Body"),
+    Exercise("Clean", "Full Body")
 )
+
 
 // Function to get exercises by type
 fun getExercisesByType(type: String): List<Exercise> {
