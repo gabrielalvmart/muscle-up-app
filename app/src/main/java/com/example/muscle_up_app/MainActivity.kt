@@ -1,6 +1,5 @@
 package com.example.muscle_up_app
 
-import MyRecords
 import android.app.Application
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.muscle_up_app.presentation.login.LoginScreen
 import com.example.muscle_up_app.presentation.mainMenu.MainMenu
+import com.example.muscle_up_app.presentation.myRecords.MyRecords
 import com.example.muscle_up_app.presentation.trainings.Trainings
 import com.example.muscle_up_app.presentation.ui.theme.Muscle_up_appTheme
 import com.example.muscle_up_app.presentation.weightCalculator.WeightCalculator

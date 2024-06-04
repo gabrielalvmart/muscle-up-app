@@ -1,3 +1,6 @@
+package com.example.muscle_up_app.presentation.myRecords
+
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,11 +25,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.muscle_up_app.presentation.myRecords.MyRecordsViewModel
 
 @Composable
 fun MyRecords(
@@ -34,6 +37,7 @@ fun MyRecords(
 ) {
     val viewModel: MyRecordsViewModel = hiltViewModel()
     val personalRecords by viewModel.personalRecords.collectAsState()
+    val context = LocalContext.current
 
     val tempWeights = remember { mutableStateMapOf<String, Int>() }
 
@@ -61,7 +65,7 @@ fun MyRecords(
                     viewModel.updatePersonalRecord(exercise, weight)
                 }
             },
-            modifier =Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
                 containerColor = Color(244, 67, 54, 255),
@@ -82,6 +86,12 @@ fun MyRecords(
         ) {
             Text(text = "Regresar")
         }
+    }
+
+    val savedChanges by viewModel.savedChanges
+    if (savedChanges) {
+        Toast.makeText(context, "Cambios guardados correctamente", Toast.LENGTH_SHORT).show()
+        viewModel.savedChanges.value = false
     }
 }
 
